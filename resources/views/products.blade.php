@@ -1,7 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: arthur
- * Date: 6/24/15
- * Time: 12:28 AM
- */
+<h1>Listagem de Produtos</h1>
+
+<ul>
+    @foreach($products as $product)
+        <li>
+            {{ $product->name }} | {{ $product->description }}
+            <br><b>R$</b> {{ $product->price }}
+        </li>
+    @endforeach
+</ul>
