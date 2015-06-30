@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeCommerce\Http\Controllers;
+namespace CodeCommerce\Http\Controllers\Admin;
 
 use CodeCommerce\Product;
 use Illuminate\Http\Request;
@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
-class AdminProductsController extends Controller
+class ProductsController extends Controller
 {
-    private $products;
+    private $productModel;
 
-    public function __construct(Product $product)
+    public function __construct(Product $productModel)
     {
-        $this->products = $product;
+        $this->productModel = $productModel;
     }
 
     /**
@@ -24,9 +24,9 @@ class AdminProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->products->all();
+        $products = $this->productModel->all();
 
-        return view('products', compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
@@ -44,9 +44,14 @@ class AdminProductsController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Requests\ProductRequest $request)
     {
-        //
+//        dd($request->all());
+        $inputs = $request->all();
+        $product = $this->productModel->fill($inputs);
+        $product->save();
+
+        return redirect()->route('admin.products');
     }
 
     /**
@@ -68,7 +73,9 @@ class AdminProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = $this->productModel->find($id);
+
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -77,9 +84,11 @@ class AdminProductsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Requests\ProductRequest $request, $id)
     {
-        //
+        $this->productModel->find($id)->update($request->all());
+
+        return redirect()->route('admin.products');
     }
 
     /**
@@ -90,6 +99,8 @@ class AdminProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->productModel->find($id)->delete();
+
+        return redirect()->route('admin.products');
     }
 }

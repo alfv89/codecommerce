@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeCommerce\Http\Controllers;
+namespace CodeCommerce\Http\Controllers\Admin;
 
 use CodeCommerce\Category;
 use Illuminate\Http\Request;
@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
-class AdminCategoriesController extends Controller
+class CategoriesController extends Controller
 {
-    private $categories;
+    private $categoryModel;
 
-    public function __construct(Category $category)
+    public function __construct(Category $categoryModel)
     {
-        $this->categories = $category;
+        $this->categoryModel = $categoryModel;
     }
 
     /**
@@ -24,9 +24,9 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = $this->categories->all();
+        $categories = $this->categoryModel->all();
 
-        return view('categories', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -44,9 +44,13 @@ class AdminCategoriesController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Requests\CategoryRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $category = $this->categoryModel->fill($inputs);
+        $category->save();
+
+        return redirect()->route('admin.categories');
     }
 
     /**
@@ -68,7 +72,9 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->categoryModel->find($id);
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -77,9 +83,11 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Requests\CategoryRequest $request, $id)
     {
-        //
+        $this->categoryModel->find($id)->update($request->all());
+
+        return redirect()->route('admin.categories');
     }
 
     /**
@@ -90,6 +98,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->categoryModel->find($id)->delete();
+
+        return redirect()->route('admin.categories');
     }
 }
