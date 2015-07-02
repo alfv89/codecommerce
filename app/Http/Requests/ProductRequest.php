@@ -24,7 +24,7 @@ class ProductRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:30|unique:products',
+            'name' => 'required|min:3|max:30|unique:products,name,'.$this->route()->getParameter('id'),
             'description' => 'required|string|min:5|max:255',
             'price' => 'required|numeric|min:1.00',
             'featured' => 'required|boolean',
