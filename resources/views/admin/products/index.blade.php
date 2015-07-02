@@ -14,6 +14,7 @@
                     <th>Price</th>
                     <th>Featured</th>
                     <th>Recommend</th>
+                    <th>Category</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -38,6 +39,7 @@
                                 <i class="glyphicon glyphicon-remove"></i>
                             @endif
                         </td>
+                        <td>{{ $product->category->name }}</td>
                         <td>
                             <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"
                                title="Edit product: {{ $product->name }}"
@@ -50,5 +52,7 @@
                 @endforeach
             </tbody>
         </table>
+
+        {!! $products->render() !!}
     </div>
 @endsection

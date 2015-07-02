@@ -64,6 +64,13 @@
             </div>
 
             <div class="form-group">
+                {!! Form::label('category', 'Category', ['class'=>'col-sm-2 control-label']) !!}
+                <div class="col-sm-10">
+                    {!! Form::select('category_id', $categories, $product->category->id, ['class'=>'form-control']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     {!! Form::submit('Save product', ['class'=>'btn btn-primary']) !!}
                     <a href="{{ route('admin.products') }}" class="btn btn-default">Back</a>

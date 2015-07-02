@@ -2,6 +2,7 @@
 
 namespace CodeCommerce\Http\Controllers\Admin;
 
+use CodeCommerce\Category;
 use CodeCommerce\Product;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->productModel->all();
+//        $products = $this->productModel->all();
+        $products = $this->productModel->paginate(10);
 
         return view('admin.products.index', compact('products'));
     }
@@ -32,16 +34,20 @@ class ProductsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Category $category
      * @return Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        return view('admin.products.create');
+        $categories = $category->lists('name', 'id');
+
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param Requests\ProductRequest $request
      * @return Response
      */
     public function store(Requests\ProductRequest $request)
@@ -68,20 +74,23 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Category $category
+     * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Category $category, $id)
     {
+        $categories = $category->lists('name', 'id');
         $product = $this->productModel->find($id);
 
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact(['product', 'categories']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param Requests\ProductRequest $request
+     * @param  int $id
      * @return Response
      */
     public function update(Requests\ProductRequest $request, $id)
