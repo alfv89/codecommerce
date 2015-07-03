@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-ide-helper": "v2.0.5",
         "illuminate/html": "v5.0.0",
-        "fzaninotto/faker": "v1.5.0"
+        "fzaninotto/faker": "v1.5.0",
+        "intervention/image": "2.3.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

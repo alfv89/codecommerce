@@ -4,10 +4,14 @@ namespace CodeCommerce\Http\Controllers\Admin;
 
 use CodeCommerce\Category;
 use CodeCommerce\Product;
+use CodeCommerce\ProductImage;
 use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -111,5 +115,76 @@ class ProductsController extends Controller
         $this->productModel->find($id)->delete();
 
         return redirect()->route('admin.products');
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function images($id)
+    {
+        $product = $this->productModel->find($id);
+
+        return view('admin.products.images.index', compact('product'));
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     */
+    public function createImage($id)
+    {
+        $product = $this->productModel->find($id);
+
+        return view('admin.products.images.create', compact('product'));
+    }
+
+    /**
+     * @param Requests\ProductImageRequest $request
+     * @param $id
+     * @param ProductImage $productImage
+     * @return Response
+     */
+    public function storeImage(Requests\ProductImageRequest $request, $id, ProductImage $productImage)
+    {
+//        dd($request->file('image'));
+        $file = $request->file('image');
+        $name = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $mime = $file->getClientMimeType();
+        $size = $file->getClientSize();
+
+        $newName = md5(explode('.'.$extension, $name)[0].'_'.time()).'.'.$extension;
+
+        $productImage::create([
+            'name'=>$newName,
+            'extension'=>$extension,
+            'mime'=>$mime,
+            'size'=>$size,
+            'product_id'=>$id
+        ]);
+
+        Storage::disk('public')->put($newName, File::get($file));
+
+        return redirect()->route('admin.products.images', ['id'=>$id]);
+    }
+
+    /**
+     * @param ProductImage $productImage
+     * @param $id
+     * @return Response
+     */
+    public function destroyImage(ProductImage $productImage, $id)
+    {
+        $image = $productImage->find($id);
+
+        if (file_exists(public_path('uploads').'/'.$image->name)) {
+            Storage::disk('public')->delete($image->name);
+        }
+
+        $product = $image->product;
+        $image->delete();
+
+        return redirect()->route('admin.products.images', ['id'=>$product->id]);
     }
 }

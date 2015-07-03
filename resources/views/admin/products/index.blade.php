@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->description }}</td>
+                        <td>{{ str_limit($product->description, $limit=100, $end = '...') }}</td>
                         <td>$ {{ $product->price }}</td>
                         <td>
                             @if($product->featured)
@@ -41,6 +41,9 @@
                         </td>
                         <td>{{ $product->category->name }}</td>
                         <td>
+                            <a href="{{ route('admin.products.images', ['id'=>$product->id]) }}"
+                               title="Go to images"
+                               class="glyphicon glyphicon-picture"></a> |
                             <a href="{{ route('admin.products.edit', ['id'=>$product->id]) }}"
                                title="Edit product: {{ $product->name }}"
                                class="glyphicon glyphicon-edit"></a> |

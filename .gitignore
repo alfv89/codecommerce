@@ -1,6 +1,8 @@
 ###############
 ### LARAVEL ###
 ###############
+/public/uploads/*
+!/public/uploads/.gitignore
 /bootstrap/compiled.php
 /vendor
 /node_modules
