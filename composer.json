@@ -10,7 +10,8 @@
         "barryvdh/laravel-ide-helper": "v2.0.5",
         "illuminate/html": "v5.0.0",
         "fzaninotto/faker": "v1.5.0",
-        "intervention/image": "2.3.0"
+        "intervention/image": "2.3.0",
+        "laravel/elixir": "^1.0@dev"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
