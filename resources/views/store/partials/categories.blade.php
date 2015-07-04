@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="http://commerce.dev:10088/category/1">
+                            <a href="{{ route('store.category', ['id' => $category->id]) }}">
                                 {{ $category->name }}
                             </a>
                         </h4>

@@ -48,6 +48,18 @@ class Product extends Model
         return $query->where('recommend', '=', 1);
     }
 
+    public function scopeOfCategory($query, $id)
+    {
+        return $query->where('category_id', '=', $id);
+    }
+
+    public function scopeOfTag($query, $id)
+    {
+        return $query->whereHas('tags', function($q) use ($id){
+            $q->where('id', '=', $id);
+        });
+    }
+
     /*
      * ATTRIBUTES
      */
