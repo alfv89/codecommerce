@@ -71,6 +71,13 @@
             </div>
 
             <div class="form-group">
+                {!! Form::label('tags', 'Tags', ['class'=>'col-sm-2 control-label']) !!}
+                <div class="col-sm-10">
+                    {!! Form::select('tags[]', $tags, $product->tags->lists('id')->toArray(), ['class'=>'form-control', 'multiple']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     {!! Form::submit('Save product', ['class'=>'btn btn-primary']) !!}
                     <a href="{{ route('admin.products') }}" class="btn btn-default">Back</a>

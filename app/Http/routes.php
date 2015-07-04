@@ -33,7 +33,7 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/', ['as'=>'admin.products', 'uses'=>'Admin\ProductsController@index']);
         Route::get('create', ['as'=>'admin.products.create', 'uses'=>'Admin\ProductsController@create']);
         Route::post('create', ['as'=>'admin.products.store', 'uses'=>'Admin\ProductsController@store']);
-//        Route::get('{id}/show', ['as'=>'admin.products.show', 'uses'=>'Admin\ProductsController@show']);
+        Route::get('{id}/show', ['as'=>'admin.products.show', 'uses'=>'Admin\ProductsController@show']);
         Route::get('{id}/edit', ['as'=>'admin.products.edit', 'uses'=>'Admin\ProductsController@edit']);
         Route::put('{id}/update', ['as'=>'admin.products.update', 'uses'=>'Admin\ProductsController@update']);
         Route::get('{id}/destroy', ['as'=>'admin.products.destroy', 'uses'=>'Admin\ProductsController@destroy']);
@@ -44,6 +44,15 @@ Route::group(['prefix'=>'admin'], function() {
             Route::post('store/{id}/product', ['as'=>'admin.products.images.store', 'uses'=>'Admin\ProductsController@storeImage']);
             Route::get('destroy/{id}/image', ['as'=>'admin.products.images.destroy', 'uses'=>'Admin\ProductsController@destroyImage']);
         });
+    });
+
+    Route::group(['prefix'=>'tags'], function() {
+        Route::get('/', ['as'=>'admin.tags', 'uses'=>'Admin\TagsController@index']);
+        Route::get('create', ['as'=>'admin.tags.create', 'uses'=>'Admin\TagsController@create']);
+        Route::post('create', ['as'=>'admin.tags.store', 'uses'=>'Admin\TagsController@store']);
+        Route::get('{id}/edit', ['as'=>'admin.tags.edit', 'uses'=>'Admin\TagsController@edit']);
+        Route::put('{id}/update', ['as'=>'admin.tags.update', 'uses'=>'Admin\TagsController@update']);
+        Route::get('{id}/destroy', ['as'=>'admin.tags.destroy', 'uses'=>'Admin\TagsController@destroy']);
     });
 });
 

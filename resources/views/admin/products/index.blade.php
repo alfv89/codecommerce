@@ -41,6 +41,9 @@
                         </td>
                         <td>{{ $product->category->name }}</td>
                         <td>
+                            <a href="{{ route('admin.products.show', ['id'=>$product->id]) }}"
+                               title="View product: {{ $product->name }}"
+                               class="glyphicon glyphicon-eye-open"></a> |
                             <a href="{{ route('admin.products.images', ['id'=>$product->id]) }}"
                                title="Go to images"
                                class="glyphicon glyphicon-picture"></a> |

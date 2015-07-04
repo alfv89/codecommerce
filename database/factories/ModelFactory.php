@@ -57,3 +57,9 @@ $factory->define(CodeCommerce\ProductImage::class, function ($faker) {
         'product_id' => $faker->numberBetween(1,50),
     ];
 });
+
+$factory->define(CodeCommerce\Tag::class, function ($faker) {
+    return [
+        'name' => $faker->word
+    ];
+});

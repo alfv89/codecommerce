@@ -2,19 +2,22 @@
 
 namespace CodeCommerce\Http\Controllers\Admin;
 
-use CodeCommerce\Category;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 
-class CategoriesController extends Controller
+class TagsController extends Controller
 {
-    private $categoryModel;
+    private $tagModel;
 
-    public function __construct(Category $categoryModel)
+    /**
+     * @param Tag $tagModel
+     */
+    public function __construct(Tag $tagModel)
     {
-        $this->categoryModel = $categoryModel;
+        $this->tagModel = $tagModel;
     }
 
     /**
@@ -24,10 +27,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-//        $categories = $this->categoryModel->all();
-        $categories = $this->categoryModel->paginate(10);
+        $tags = $this->tagModel->paginate(10);
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -37,22 +39,22 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.tags.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Requests\CategoryRequest $request
+     * @param Requests\TagRequest $request
      * @return Response
      */
-    public function store(Requests\CategoryRequest $request)
+    public function store(Requests\TagRequest $request)
     {
         $inputs = $request->all();
-        $category = $this->categoryModel->fill($inputs);
-        $category->save();
+        $tag = $this->tagModel->fill($inputs);
+        $tag->save();
 
-        return redirect()->route('admin.categories');
+        return redirect()->route('admin.tags');
     }
 
     /**
@@ -74,23 +76,23 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->categoryModel->find($id);
+        $tag = $this->tagModel->find($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Requests\CategoryRequest $request
+     * @param Requests\TagRequest $request
      * @param  int $id
      * @return Response
      */
-    public function update(Requests\CategoryRequest $request, $id)
+    public function update(Requests\TagRequest $request, $id)
     {
-        $this->categoryModel->find($id)->update($request->all());
+        $this->tagModel->find($id)->update($request->all());
 
-        return redirect()->route('admin.categories');
+        return redirect()->route('admin.tags');
     }
 
     /**
@@ -101,8 +103,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryModel->find($id)->delete();
+        $this->tagModel->find($id)->delete();
 
-        return redirect()->route('admin.categories');
+        return redirect()->route('admin.tags');
     }
 }

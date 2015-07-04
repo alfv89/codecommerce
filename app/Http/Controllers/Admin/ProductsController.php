@@ -5,6 +5,7 @@ namespace CodeCommerce\Http\Controllers\Admin;
 use CodeCommerce\Category;
 use CodeCommerce\Product;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Http\Request;
 
 use CodeCommerce\Http\Requests;
@@ -39,13 +40,15 @@ class ProductsController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Category $category
+     * @param Tag $tag
      * @return Response
      */
-    public function create(Category $category)
+    public function create(Category $category, Tag $tag)
     {
         $categories = $category->lists('name', 'id');
+        $tags = $tag->lists('name', 'id');
 
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact(['categories', 'tags']));
     }
 
     /**
@@ -56,10 +59,10 @@ class ProductsController extends Controller
      */
     public function store(Requests\ProductRequest $request)
     {
-//        dd($request->all());
         $inputs = $request->all();
         $product = $this->productModel->fill($inputs);
         $product->save();
+        $product->tags()->sync($request->get('tags'));
 
         return redirect()->route('admin.products');
     }
@@ -72,22 +75,26 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productModel->find($id);
+
+        return view('admin.products.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param Category $category
+     * @param Tag $tag
      * @param  int $id
      * @return Response
      */
-    public function edit(Category $category, $id)
+    public function edit(Category $category, Tag $tag, $id)
     {
         $categories = $category->lists('name', 'id');
+        $tags = $tag->lists('name', 'id');
         $product = $this->productModel->find($id);
 
-        return view('admin.products.edit', compact(['product', 'categories']));
+        return view('admin.products.edit', compact(['product', 'categories', 'tags']));
     }
 
     /**
@@ -99,7 +106,9 @@ class ProductsController extends Controller
      */
     public function update(Requests\ProductRequest $request, $id)
     {
-        $this->productModel->find($id)->update($request->all());
+        $product = $this->productModel->find($id);
+        $product->update($request->all());
+        $product->tags()->sync($request->get('tags'));
 
         return redirect()->route('admin.products');
     }
