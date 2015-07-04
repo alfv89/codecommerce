@@ -20,6 +20,9 @@ Route::get('/', ['as'=>'store.index', 'uses'=>'Front\StoreController@index']);
 Route::get('category/{id}', ['as'=>'store.category', 'uses'=>'Front\StoreController@category']);
 Route::get('tag/{id}', ['as'=>'store.tag', 'uses'=>'Front\StoreController@tag']);
 Route::get('product/{id}', ['as'=>'store.product', 'uses'=>'Front\StoreController@product']);
+Route::get('cart', ['as'=>'store.cart', 'uses'=>'Front\CartController@index']);
+Route::get('cart/add/{id}', ['as'=>'store.cart.add', 'uses'=>'Front\CartController@add']);
+Route::get('cart/remove/{id}', ['as'=>'store.cart.remove', 'uses'=>'Front\CartController@remove']);
 
 /*
  * Admin Routes
