@@ -112,7 +112,15 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $this->productModel->find($id)->delete();
+        $product = $this->productModel->find($id);
+
+        if (count($product->images) > 0) {
+            $images = $product->images->lists('name')->toArray();
+
+            Storage::disk('public')->delete($images);
+        }
+
+        $product->delete();
 
         return redirect()->route('admin.products');
     }
