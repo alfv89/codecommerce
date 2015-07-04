@@ -13,10 +13,14 @@
 
 Route::pattern('id', '[0-9]+');
 
-Route::get('/', function() {
-    return view('welcome');
-});
+/*
+ * Front Routes
+ */
+Route::get('/', ['as'=>'store.index', 'uses'=>'Front\StoreController@index']);
 
+/*
+ * Admin Routes
+ */
 Route::group(['prefix'=>'admin'], function() {
     Route::group(['prefix'=>'categories'], function() {
         Route::get('/', ['as'=>'admin.categories', 'uses'=>'Admin\CategoriesController@index']);
