@@ -21,6 +21,10 @@ elixir(function(mix) {
         'responsive.css'
     ], 'public/css/all.css');
 
+    mix.styles([
+        'admin.css',
+    ], 'public/css/admin.css');
+
     mix.scripts([
         'jquery.js',
         'bootstrap.min.js',
@@ -32,6 +36,7 @@ elixir(function(mix) {
 
     mix.version([
         'css/all.css',
+        'css/admin.css',
         'js/all.js'
     ]);
 

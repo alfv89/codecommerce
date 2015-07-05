@@ -23,11 +23,13 @@ Route::get('product/{id}', ['as'=>'store.product', 'uses'=>'Front\StoreControlle
 Route::get('cart', ['as'=>'store.cart', 'uses'=>'Front\CartController@index']);
 Route::get('cart/add/{id}', ['as'=>'store.cart.add', 'uses'=>'Front\CartController@add']);
 Route::get('cart/remove/{id}', ['as'=>'store.cart.remove', 'uses'=>'Front\CartController@remove']);
+Route::get('cart/checkout/place-order', ['as'=>'store.cart.checkout.place', 'uses'=>'Front\CheckoutController@place']);
 
 /*
  * Admin Routes
  */
-Route::group(['prefix'=>'admin'], function() {
+//Route::group(['prefix'=>'admin', 'where'=>['id'=>'[0-9]+']], function() {
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function() {
     Route::group(['prefix'=>'categories'], function() {
         Route::get('/', ['as'=>'admin.categories', 'uses'=>'Admin\CategoriesController@index']);
         Route::get('create', ['as'=>'admin.categories.create', 'uses'=>'Admin\CategoriesController@create']);
@@ -65,6 +67,17 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('{id}/destroy', ['as'=>'admin.tags.destroy', 'uses'=>'Admin\TagsController@destroy']);
     });
 });
+
+/*
+ * Auth Routes
+ */
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    'test' => 'TestController'
+]);
+
+/* ====================================== */
 
 //Route::match(['get', 'post'], 'match', function() {
 //    return "This is an match route example...";
