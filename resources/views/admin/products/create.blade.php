@@ -70,10 +70,17 @@
                 </div>
             </div>
 
+            {{--<div class="form-group">--}}
+                {{--{!! Form::label('tags', 'Tags', ['class'=>'col-sm-2 control-label']) !!}--}}
+                {{--<div class="col-sm-10">--}}
+                    {{--{!! Form::select('tags[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
             <div class="form-group">
                 {!! Form::label('tags', 'Tags', ['class'=>'col-sm-2 control-label']) !!}
                 <div class="col-sm-10">
-                    {!! Form::select('tags[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}
+                    {!! Form::textarea('tags', null, ['rows'=>'3', 'placeholder'=>'As tags devem ser separadas por virgula. Ex.: tag1, tag2', 'class'=>'form-control']) !!}
                 </div>
             </div>
 

@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductsController extends Controller
 {
     private $productModel;
+    private $tagModel;
 
-    public function __construct(Product $productModel)
+    public function __construct(Product $productModel, Tag $tagModel)
     {
         $this->productModel = $productModel;
+        $this->tagModel = $tagModel;
     }
 
     /**
@@ -62,7 +64,16 @@ class ProductsController extends Controller
         $inputs = $request->all();
         $product = $this->productModel->fill($inputs);
         $product->save();
-        $product->tags()->sync($request->get('tags'));
+
+        $tags_text = explode(',', $request->get('tags'));
+        $tags_array = [];
+
+        foreach($tags_text as $tag) {
+            $tt = $this->tagModel->firstOrCreate(['name'=>trim(strtolower($tag))]);
+            $tags_array[] = $tt->id;
+        }
+
+        $product->tags()->sync($tags_array);
 
         return redirect()->route('admin.products');
     }
@@ -108,7 +119,16 @@ class ProductsController extends Controller
     {
         $product = $this->productModel->find($id);
         $product->update($request->all());
-        $product->tags()->sync($request->get('tags'));
+
+        $tags_text = explode(',', $request->get('tags'));
+        $tags_array = [];
+
+        foreach($tags_text as $tag) {
+            $tt = $this->tagModel->firstOrCreate(['name'=>trim(strtolower($tag))]);
+            $tags_array[] = $tt->id;
+        }
+
+        $product->tags()->sync($tags_array);
 
         return redirect()->route('admin.products');
     }
