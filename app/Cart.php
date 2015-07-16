@@ -34,7 +34,12 @@ class Cart
      */
     public function changeQuantity($id, $qtd)
     {
-        $this->items[$id]['qtd'] = $qtd;
+        if($qtd > 0) {
+            $this->items[$id]['qtd'] = $qtd;
+        } else {
+            unset($this->items[$id]);
+        }
+
     }
 
     /**
