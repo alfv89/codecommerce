@@ -10,7 +10,7 @@
                             <td class="image">Item</td>
                             <td class="description"></td>
                             <td class="price">Valor</td>
-                            <td class="price">Quantidade</td>
+                            <td class="price" style="width: 150px;">Quantidade</td>
                             <td class="price">Total</td>
                             <td></td>
                         </tr>
@@ -38,7 +38,10 @@
                                 </td>
 
                                 <td class="cart_quantity">
-                                    {{ $item['qtd'] }}
+                                    {!! Form::open(['route'=>['store.cart.change', $k], 'class'=>'form-horizontal']) !!}
+                                        {!! Form::text('qtd', $item['qtd'], ['class'=>'form-control', 'style'=>'width: 50px; float: left; margin-right: 5px;']) !!}
+                                        {!! Form::submit('Alterar', ['class'=>'btn btn-defaut']) !!}
+                                    {!! Form::close() !!}
                                 </td>
 
                                 <td class="cart_total">

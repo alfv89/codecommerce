@@ -23,6 +23,7 @@ Route::get('product/{id}', ['as'=>'store.product', 'uses'=>'Front\StoreControlle
 Route::get('cart', ['as'=>'store.cart', 'uses'=>'Front\CartController@index']);
 Route::get('cart/add/{id}', ['as'=>'store.cart.add', 'uses'=>'Front\CartController@add']);
 Route::get('cart/remove/{id}', ['as'=>'store.cart.remove', 'uses'=>'Front\CartController@remove']);
+Route::post('cart/changeQuantity/{id}', ['as'=>'store.cart.change', 'uses'=>'Front\CartController@changeQuantity']);
 Route::get('cart/checkout/place-order', ['as'=>'store.cart.checkout.place', 'uses'=>'Front\CheckoutController@place']);
 
 /*

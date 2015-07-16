@@ -4,8 +4,8 @@ namespace CodeCommerce\Http\Controllers\Front;
 
 use CodeCommerce\Cart;
 use CodeCommerce\Http\Controllers\Controller;
-use CodeCommerce\Http\Requests;
 use CodeCommerce\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -38,6 +38,22 @@ class CartController extends Controller
 
         $product = $this->productModel->find($id);
         $cart->add($id, $product->name, $product->price);
+
+        Session::set('cart', $cart);
+
+        return redirect()->route('store.cart');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeQuantity($id, Request $request)
+    {
+        $cart = $this->getCart();
+
+        $cart->changeQuantity($id, $request->get('qtd'));
 
         Session::set('cart', $cart);
 

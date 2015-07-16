@@ -30,6 +30,15 @@ class Cart
 
     /**
      * @param $id
+     * @param $qtd
+     */
+    public function changeQuantity($id, $qtd)
+    {
+        $this->items[$id]['qtd'] = $qtd;
+    }
+
+    /**
+     * @param $id
      */
     public function remove($id)
     {
