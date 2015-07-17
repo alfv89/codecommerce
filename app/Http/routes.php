@@ -30,7 +30,7 @@ Route::get('cart/checkout/place-order', ['as'=>'store.cart.checkout.place', 'use
  * Admin Routes
  */
 //Route::group(['prefix'=>'admin', 'where'=>['id'=>'[0-9]+']], function() {
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function() {
+Route::group(['prefix'=>'admin', 'middleware'=>['auth','perms']], function() {
     Route::group(['prefix'=>'categories'], function() {
         Route::get('/', ['as'=>'admin.categories', 'uses'=>'Admin\CategoriesController@index']);
         Route::get('create', ['as'=>'admin.categories.create', 'uses'=>'Admin\CategoriesController@create']);
