@@ -25,6 +25,7 @@ Route::get('cart/add/{id}', ['as'=>'store.cart.add', 'uses'=>'Front\CartControll
 Route::get('cart/remove/{id}', ['as'=>'store.cart.remove', 'uses'=>'Front\CartController@remove']);
 Route::post('cart/changeQuantity/{id}', ['as'=>'store.cart.change', 'uses'=>'Front\CartController@changeQuantity']);
 Route::get('cart/checkout/place-order', ['as'=>'store.cart.checkout.place', 'uses'=>'Front\CheckoutController@place']);
+Route::get('account/orders', ['as'=>'account.orders', 'middleware'=>'auth', 'uses'=>'Front\AccountController@orders']);
 
 /*
  * Admin Routes
@@ -79,6 +80,11 @@ Route::controllers([
 ]);
 
 /* ====================================== */
+
+//Route::get('event', function(){
+////    \Illuminate\Support\Facades\Event::fire(new \CodeCommerce\Events\CheckoutEvent());
+//    event(new \CodeCommerce\Events\CheckoutEvent());
+//});
 
 //Route::match(['get', 'post'], 'match', function() {
 //    return "This is an match route example...";

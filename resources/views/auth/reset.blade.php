@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('store.template')
 
 @section('content')
 <div class="container-fluid">
