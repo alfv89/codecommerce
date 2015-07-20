@@ -9,6 +9,7 @@
 .env.*.php
 .env.php
 .env
+_ide_helper.php
 
 ###############
 ### SUBLIME ###

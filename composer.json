@@ -7,11 +7,12 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "barryvdh/laravel-ide-helper": "v2.0.5",
+        "barryvdh/laravel-ide-helper": "v2.0.6",
         "illuminate/html": "v5.0.0",
         "fzaninotto/faker": "v1.5.0",
         "intervention/image": "2.3.0",
-        "laravel/elixir": "^1.0@dev"
+        "laravel/elixir": "^1.0@dev",
+        "guzzlehttp/guzzle": "6.0.2"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
