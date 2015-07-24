@@ -18,6 +18,11 @@ $factory->define(CodeCommerce\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'address' => $faker->streetAddress,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'fu' => $faker->stateAbbr,
+        'zipcode' => $faker->postcode,
         'password' => Hash::make(str_random(10)),
         'remember_token' => Hash::make(str_random(10)),
     ];
@@ -59,6 +64,12 @@ $factory->define(CodeCommerce\ProductImage::class, function ($faker) {
 });
 
 $factory->define(CodeCommerce\Tag::class, function ($faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+
+$factory->define(CodeCommerce\OrderStatus::class, function ($faker) {
     return [
         'name' => $faker->word
     ];

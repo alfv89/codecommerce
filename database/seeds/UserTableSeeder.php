@@ -18,6 +18,11 @@ class UserTableSeeder extends Seeder
         factory('CodeCommerce\User')->create([
             'name' => 'Administrator',
             'email' => 'admin@codecommerce.com',
+            'address' => 'Rua dos Bobos, n 0',
+            'city' => 'Oz',
+            'state' => 'Asdrubal',
+            'fu' => 'AS',
+            'zipcode' => '22333000',
             'password' => Hash::make(123456),
             'is_admin' => 1,
             'remember_token' => Hash::make(str_random(10)),
@@ -26,6 +31,11 @@ class UserTableSeeder extends Seeder
         factory('CodeCommerce\User')->create([
             'name' => 'Arthur Vasconcelos',
             'email' => 'vasconcelos.arthur@gmail.com',
+            'address' => 'Rua dos Bobos, n 0',
+            'city' => 'Oz',
+            'state' => 'Asdrubal',
+            'fu' => 'AS',
+            'zipcode' => '22333000',
             'password' => Hash::make(123456),
             'remember_token' => Hash::make(str_random(10)),
         ]);

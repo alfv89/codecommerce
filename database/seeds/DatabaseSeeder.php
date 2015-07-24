@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
          $this->call('ProductImageTableSeeder');
          $this->call('TagTableSeeder');
          $this->call('ProductTagTableSeeder');
+         $this->call('OrderStatusTableSeeder');
 
         Model::reguard();
     }

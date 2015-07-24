@@ -8,13 +8,18 @@ class Order extends Model
 {
     protected $fillable = [
         'total',
-        'status',
+        'status_id',
         'user_id'
     ];
 
     public function items()
     {
         return $this->hasMany('CodeCommerce\OrderItem');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('CodeCommerce\OrderStatus');
     }
 
     public function user()

@@ -68,6 +68,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','perms']], function() {
         Route::put('{id}/update', ['as'=>'admin.tags.update', 'uses'=>'Admin\TagsController@update']);
         Route::get('{id}/destroy', ['as'=>'admin.tags.destroy', 'uses'=>'Admin\TagsController@destroy']);
     });
+
+    Route::group(['prefix'=>'orders'], function() {
+        Route::get('/', ['as'=>'admin.orders', 'uses'=>'Admin\OrdersController@index']);
+        Route::put('{id}/update', ['as'=>'admin.orders.update', 'uses'=>'Admin\OrdersController@update']);
+    });
 });
 
 /*

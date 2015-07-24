@@ -42,6 +42,7 @@ class CheckoutController extends Controller
 //            $test = DB::transaction(function() {
                 $order = $this->orderModel->create([
                     'total' => $cart->getTotal(),
+                    'status_id' => 2,
                     'user_id' => Auth::user()->id
                 ]);
 
