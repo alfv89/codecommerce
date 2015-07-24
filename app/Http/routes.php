@@ -75,6 +75,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','perms']], function() {
     });
 });
 
+Route::get('pagseguro', 'Front\CheckoutController@test');
+
 /*
  * Auth Routes
  */

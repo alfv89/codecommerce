@@ -12,7 +12,8 @@
         "fzaninotto/faker": "v1.5.0",
         "intervention/image": "2.3.0",
         "laravel/elixir": "^1.0@dev",
-        "guzzlehttp/guzzle": "6.0.2"
+        "guzzlehttp/guzzle": "6.0.2",
+        "wesleywillians/laravel-pagseguro": "dev-master"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

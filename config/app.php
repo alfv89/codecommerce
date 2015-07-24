@@ -139,6 +139,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProviderLaravel5::class,
+        LaravelPagseguro\LaravelPagseguroServiceProvider::class,
 
         /*
          * Application Service Providers...
