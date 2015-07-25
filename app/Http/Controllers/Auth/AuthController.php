@@ -47,7 +47,7 @@ class AuthController extends Controller
             'city' => 'required|max:50',
             'state' => 'required|max:50',
             'fu' => 'required|max:2',
-            'zipcode' => 'required|integer|max:8',
+            'zipcode' => 'required|integer|digits:8',
             'password' => 'required|confirmed|min:6',
         ]);
     }
