@@ -13,7 +13,8 @@ class ProductTagTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_tag')->truncate();
+//        DB::table('product_tag')->truncate();
+        DB::table('product_tag')->delete();
         $prods = Product::all();
 
         foreach ($prods as $prod) {

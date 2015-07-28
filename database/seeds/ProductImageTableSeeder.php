@@ -13,7 +13,8 @@ class ProductImageTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_images')->truncate();
+//        DB::table('product_images')->truncate();
+        DB::table('product_images')->delete();
         $files = Storage::disk('public')->files();
 
         if(($key = array_search('.gitignore', $files)) !== false) {

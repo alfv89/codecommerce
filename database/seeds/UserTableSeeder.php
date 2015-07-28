@@ -13,7 +13,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+//        DB::table('users')->truncate();
+        DB::table('users')->delete();
 
         factory('CodeCommerce\User')->create([
             'name' => 'Administrator',

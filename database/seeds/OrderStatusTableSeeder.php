@@ -11,7 +11,8 @@ class OrderStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_statuses')->truncate();
+//        DB::table('order_statuses')->truncate();
+        DB::table('order_statuses')->delete();
 
         // 1
         factory('CodeCommerce\OrderStatus')->create([

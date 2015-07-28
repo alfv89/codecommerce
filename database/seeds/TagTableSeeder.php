@@ -12,7 +12,8 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tags')->truncate();
+//        DB::table('tags')->truncate();
+        DB::table('tags')->delete();
 
         factory('CodeCommerce\Tag', 15)->create();
     }
